@@ -1,13 +1,12 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'https://blog-law.onrender.com',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Request interceptor — attach JWT token to every request
 API.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -19,14 +18,12 @@ API.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response interceptor — handle 401 globally
 API.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      // Only redirect if not already on login page
       if (window.location.pathname !== '/login') {
         window.location.href = '/login';
       }
