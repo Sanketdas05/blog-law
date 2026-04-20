@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f8f5ef;
+  --surface: #fdfbf7;
+  --card: #f3efe7;
+  --text: #1f1a17;
+  --muted: #6d655d;
+  --line: #ddd4c7;
+  --primary: #7a5c2e;
+  --primary-dark: #5f451f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+::selection {
+  background: #d7c1a0;
+  color: #1f1a17;
+}
