@@ -15,7 +15,6 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Restore session from localStorage on mount
   useEffect(() => {
     try {
       const storedToken = localStorage.getItem('token');
@@ -25,7 +24,7 @@ export const AuthProvider = ({ children }) => {
         setToken(storedToken);
         setUser(JSON.parse(storedUser));
       }
-    } catch {
+    } catch (error) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
     } finally {
@@ -47,12 +46,24 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('user');
   };
 
-  const isAuthor = user?.role === 'author';
   const isAuthenticated = !!token;
+  const isAuthor = user?.role === 'author';
+  const isAdmin = user?.role === 'admin';
+  const canAccessEditor = isAuthor || isAdmin;
 
   return (
     <AuthContext.Provider
-      value={{ user, token, loading, isAuthor, isAuthenticated, login, logout }}
+      value={{
+        user,
+        token,
+        loading,
+        isAuthenticated,
+        isAuthor,
+        isAdmin,
+        canAccessEditor,
+        login,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

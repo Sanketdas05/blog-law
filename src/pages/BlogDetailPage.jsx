@@ -105,7 +105,7 @@ const BlogDetailPage = () => {
           {/* Meta */}
           <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500 mb-8 pb-8 border-b border-gray-100">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0a192f] to-[#112a4a] flex items-center justify-center text-white font-bold text-sm">
+              <div className="w-10 h-10 rounded-full bg-linear-to-br from-[#0a192f] to-[#112a4a] flex items-center justify-center text-white font-bold text-sm">
                 {post.author?.name?.charAt(0) || 'A'}
               </div>
               <div>
